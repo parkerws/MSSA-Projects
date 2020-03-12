@@ -11,7 +11,10 @@ namespace Bisection
         static Random rand = new Random();
 
         public static int[] machineArr = Enumerable.Range(0, 100).ToArray();
-        private static int counter = 1;
+        public static int counter = 1;
+        public static double computerAverage = 0;
+        public static double computerGameCounter = 0;
+
 
         
 
@@ -28,11 +31,16 @@ namespace Bisection
 
         Console.WriteLine($"Is your guess {computerGuess}?\n\n (c)orrect, too (h)igh, or too (l)ow");
         string response = Console.ReadLine().ToLower();
-        
 
+        string reply = "";
         if (response == "c" || response == "correct")
         {
-            return $"Number found after {counter} guesses";
+            computerGameCounter++;
+            computerAverage += counter;
+            reply =  $"Number found after {counter} guesses.\nThe average across {computerGameCounter} is {computerAverage / computerGameCounter}";
+            counter = 1;
+            
+            return reply;
         }
         else if (response == "h" || response == "high")
         {

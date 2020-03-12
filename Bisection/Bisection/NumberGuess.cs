@@ -8,6 +8,8 @@ namespace Bisection
     class NumberGuess
     {
         static Random rand = new Random();
+        public static double humanAverage = 0;
+        public static int humanGameCounter = 0;
 
         public static int HandleGuessInput()
         {
@@ -23,13 +25,16 @@ namespace Bisection
 
         public static string HumanGuess(int guess)
         {
-            int guesses = 1;
+            int guesses = 0;
             int answer = rand.Next(1, 1000);
 
             while (guess != answer)
             {
                 if (guess == answer)
                 {
+                    guesses++;
+                    
+                    
                     break;
                 }
                 else if (guess < answer)
@@ -48,8 +53,9 @@ namespace Bisection
                 }
 
             }
-
-            return $"\n\nCorrect! The answer is {answer}, found after {guesses} guesses.";
+            humanAverage += guesses;
+            ++humanGameCounter;
+            return $"\n\nCorrect! The answer is {answer}, found after {guesses} guesses.\nThe average guesses across {humanGameCounter} games is {humanAverage / humanGameCounter}";
         }
 
     }
